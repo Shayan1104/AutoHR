@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Eye, EyeOff, X, Check, ArrowRight } from "lucide-react";
 
 interface AuthModalProps {
@@ -16,6 +18,7 @@ export default function AuthModal({
   defaultMode = "signup",
   standalone = false,
 }: AuthModalProps) {
+  const router = useRouter();
   const [isSignUp, setIsSignUp] = useState(defaultMode === "signup");
   const [showPassword, setShowPassword] = useState(false);
   const [fullName, setFullName] = useState("Amélie Laurent");
@@ -40,10 +43,14 @@ export default function AuthModal({
       setNotification({
         type: "success",
         message: isSignUp
-          ? "Account created successfully! Welcome to AutoHR."
-          : "Logged in successfully! Welcome back to AutoHR.",
+          ? "Account created successfully! Redirecting to Dashboard..."
+          : "Logged in successfully! Redirecting to Dashboard...",
       });
-    }, 800);
+      setTimeout(() => {
+        router.push("/dashboard");
+        if (onClose) onClose();
+      }, 700);
+    }, 600);
   };
 
   const calendarDays = [
@@ -63,11 +70,33 @@ export default function AuthModal({
         {/* Left Form Section */}
         <div className="form-section">
           {/* Top Pill Logo Badge */}
-          <div className="brand-row">
+          <div className="brand-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div className="brand-pill">
               <span className="brand-dot" />
               <span>AutoHR</span>
             </div>
+            <Link
+              href="/dashboard"
+              onClick={() => {
+                if (onClose) onClose();
+              }}
+              style={{
+                fontSize: "12px",
+                fontWeight: 600,
+                color: "#b45309",
+                background: "rgba(245, 190, 66, 0.18)",
+                padding: "4px 10px",
+                borderRadius: "9999px",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "4px",
+                border: "1px solid rgba(245, 190, 66, 0.35)",
+              }}
+            >
+              <span>View Dashboard Demo</span>
+              <ArrowRight size={12} />
+            </Link>
           </div>
 
           {/* Heading */}

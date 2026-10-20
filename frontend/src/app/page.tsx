@@ -63,14 +63,21 @@ export default function LandingPage() {
                 </a>
               </li>
               <li>
-                <a href="#preview" className="nav-link">
-                  Interactive Demo
-                </a>
+                <Link href="/dashboard" className="nav-link">
+                  Dashboard Demo
+                </Link>
               </li>
             </ul>
           </nav>
 
           <div className="nav-actions">
+            <Link
+              href="/dashboard"
+              className="btn-nav-ghost"
+              style={{ textDecoration: "none" }}
+            >
+              Live Demo
+            </Link>
             <button
               type="button"
               className="btn-nav-ghost"
@@ -118,10 +125,10 @@ export default function LandingPage() {
               <span>Start 30-Day Free Trial</span>
               <ArrowRight size={18} />
             </button>
-            <a href="#pipeline" className="btn-hero-secondary">
-              <span>View 10-Step Workflow</span>
+            <Link href="/dashboard" className="btn-hero-secondary">
+              <span>View Dashboard Demo</span>
               <ChevronRight size={18} />
-            </a>
+            </Link>
           </div>
 
           {/* Quick Metrics Ribbon */}
